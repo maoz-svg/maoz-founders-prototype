@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAOZ Founders Club — אב-טיפוס</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&family=Heebo:wght@400;500;700&family=Cormorant+Garamond:wght@500;600&family=Space+Grotesk:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<style>
+  :root{
+    --green-ink:#0c3a2b; --green:#14533d; --green-deep:#0a241b;
+    --cream:#F6F1E3; --cream-soft:#efe8d6; --cream-dim:rgba(246,241,227,0.72);
+    --gold:#C6A35B; --gold-2:#caa463;
+    --ink:#2a3a33; --ink-dim:#6b7d74; --danger:#b3543f;
+    --display:'David Libre', serif;
+    --body:'Heebo', sans-serif;
+    --serif:'Cormorant Garamond', serif;
+    --label:'Space Grotesk', sans-serif;
+    --r:22px;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; height:100%;}
+  body{
+    font-family:var(--body);
+    background:radial-gradient(120% 120% at 50% 0%, #143e2e 0%, #0a221a 55%, #061711 100%);
+    min-height:100%; display:flex; flex-direction:column; align-items:center;
+    padding:22px 12px 40px; color:var(--ink); overflow-x:hidden;
+  }
+  .topbar{display:flex; align-items:center; gap:10px; margin-bottom:14px; max-width:430px; width:100%; justify-content:center; flex-wrap:wrap;}
+  .brandline{font-family:var(--label); color:var(--gold-2); letter-spacing:3px; font-size:11px; text-align:center;}
+  .pillbtn{
+    display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+    background:rgba(8,30,22,.86); border:1px solid rgba(202,164,99,.5); color:var(--cream);
+    padding:7px 13px; border-radius:999px; font-family:var(--body); font-size:12.5px; font-weight:500;
+  }
+  .pillbtn ion-icon{font-size:15px; color:var(--gold-2);}
+  .pillbtn:hover{background:rgba(12,44,32,.95);}
+
+  /* iPhone frame */
+  .stage{transform-origin:top center;}
+  .device{
+    position:relative; width:390px; height:844px;
+    background:#0b0b0d; border-radius:56px; padding:14px;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,.7), 0 0 0 2px #1d1d20, inset 0 0 0 2px #000;
+  }
+  .device::after{ /* side buttons hint */
+    content:""; position:absolute; left:-3px; top:170px; width:3px; height:64px; background:#15151a; border-radius:3px;
+    box-shadow:0 84px 0 #15151a, 0 -120px 0 #15151a;
+  }
+  .screen{
+    position:relative; width:100%; height:100%; background:var(--cream);
+    border-radius:44px; overflow:hidden; display:flex; flex-direction:column;
+  }
+  .notch{position:absolute; top:11px; left:50%; transform:translateX(-50%); width:120px; height:33px; background:#0b0b0d; border-radius:20px; z-index:40;}
+  .statusbar{position:absolute; top:0; left:0; right:0; height:50px; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:16px 26px 0; pointer-events:none;}
+  .statusbar .t{font-family:var(--label); font-weight:500; font-size:13px;}
+  .statusbar .r{display:flex; gap:6px; align-items:center; font-size:13px;}
+
+  .scroll{flex:1; overflow-y:auto; overflow-x:hidden; padding:56px 16px 120px; -webkit-overflow-scrolling:touch;}
+  .scroll::-webkit-scrollbar{width:0;}
+
+  /* generic */
+  .h1{font-family:var(--display); font-weight:700; font-size:24px; color:var(--green); margin:0; text-align:start;}
+  .sub{font-family:var(--body); font-size:13px; color:var(--ink-dim); margin:2px 0 14px; text-align:start;}
+  .card{background:#fff; border-radius:var(--r); padding:14px; margin-bottom:10px; border:1px solid rgba(12,58,43,.07);}
+  .row-rev{display:flex; align-items:center; gap:10px;}
+  .between{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .pill{background:rgba(202,164,99,.16); border-radius:999px; padding:3px 10px; font-family:var(--body); font-weight:500; font-size:11px; color:#a8823f; white-space:nowrap;}
+  .gold-btn{background:var(--gold); color:var(--green-deep); border:none; border-radius:14px; padding:13px 18px; font-family:var(--body); font-weight:700; font-size:14px; cursor:pointer; width:100%;}
+  .soft-btn{background:var(--cream-soft); color:var(--green); border:none; border-radius:14px; padding:13px; font-family:var(--body); font-weight:700; font-size:13px; cursor:pointer; width:100%; display:flex; align-items:center; justify-content:center; gap:6px;}
+  .soft-btn ion-icon{font-size:16px;}
+
+  /* header */
+  .home-head{display:flex; align-items:center; gap:8px; margin-bottom:18px;}
+  .hello{font-size:13px; color:var(--ink-dim); margin:0;}
+  .name{font-family:var(--display); font-weight:700; font-size:22px; color:var(--green); margin:0; line-height:1.15;}
+  .icbtn{width:42px; height:42px; border-radius:999px; background:#fff; border:1px solid rgba(12,58,43,.08); display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; flex:none;}
+  .icbtn ion-icon{font-size:20px; color:var(--green);}
+  .icbtn .dot{position:absolute; top:9px; right:10px; width:7px; height:7px; border-radius:50%; background:var(--gold);}
+  .avatar{width:42px; height:42px; border-radius:999px; background:var(--green); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:700; color:var(--gold); font-size:14px; flex:none;}
+
+  /* tier hero */
+  .tier{background:var(--green); border-radius:var(--r); padding:18px; border:1px solid rgba(202,164,99,.4); box-shadow:0 14px 30px -10px rgba(12,58,43,.55); position:relative; overflow:hidden;}
+  .tier .club{font-family:var(--label); font-size:10px; letter-spacing:2px; color:var(--cream-dim);}
+  .tier .badge{display:inline-flex; align-items:center; gap:4px; border:1px solid var(--gold); border-radius:999px; padding:3px 10px; color:var(--gold); font-family:var(--label); font-size:12px; letter-spacing:1.5px;}
+  .tier .tname{font-family:var(--display); font-weight:700; font-size:27px; color:var(--cream); margin:26px 0 0; text-align:start;}
+  .tier .since{font-size:12px; color:var(--cream-dim);}
+  .tier .mono{font-family:var(--display); font-size:30px; color:rgba(202,164,99,.5);}
+
+  /* balance */
+  .bal-label{font-size:13px; color:var(--ink-dim); margin:0; text-align:start;}
+  .bal-val{font-family:var(--display); font-weight:700; font-size:27px; color:var(--green); margin:2px 0 0; text-align:start;}
+
+  /* quick grid */
+  .qgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:16px;}
+  .qa{background:#fff; border-radius:16px; padding:13px 6px; border:1px solid rgba(12,58,43,.07); display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer; text-align:center;}
+  .qa:active{transform:scale(.97);}
+  .qa .ic{width:44px; height:44px; border-radius:999px; background:var(--cream-soft); display:flex; align-items:center; justify-content:center;}
+  .qa .ic ion-icon{font-size:21px; color:var(--green);}
+  .qa .lbl{font-family:var(--body); font-weight:500; font-size:11.5px; color:var(--green); line-height:1.25;}
+
+  .sec-head{display:flex; align-items:center; justify-content:space-between; margin:22px 0 8px;}
+  .sec-title{font-family:var(--display); font-weight:700; font-size:18px; color:var(--green);}
+  .sec-link{font-family:var(--body); font-weight:500; font-size:13px; color:var(--gold); cursor:pointer;}
+
+  .proj-name{font-family:var(--display); font-weight:700; font-size:16px; color:var(--green); margin:0; text-align:start;}
+  .proj-loc{font-size:12px; color:var(--ink-dim); margin:3px 0 0; display:flex; align-items:center; gap:3px; text-align:start;}
+  .proj-loc ion-icon{font-size:13px;}
+  .proj-upd{font-size:13px; color:var(--ink); margin:10px 0 0; line-height:1.55; text-align:start;}
+  .proj-foot{display:flex; align-items:center; justify-content:space-between; margin-top:10px;}
+  .proj-inv{font-size:13px; color:var(--ink-dim);}
+  .proj-inv b{font-weight:700; color:var(--green);}
+  .proj-date{font-family:var(--label); font-size:11px; color:var(--ink-dim);}
+
+  .new-card{display:flex; align-items:center; justify-content:space-between; gap:8px; background:#fff; border-radius:16px; padding:14px; margin-bottom:10px; border:1px solid rgba(202,164,99,.25); cursor:pointer;}
+  .new-meta{font-size:11.5px; color:var(--ink-dim); margin:4px 0 0; text-align:start;}
+  .new-card>ion-icon{font-size:20px; color:var(--gold); flex:none;}
+
+  /* events */
+  .ev-card{background:#fff; border-radius:var(--r); padding:14px; margin-bottom:10px; border:1px solid rgba(12,58,43,.07);}
+  .ev-date{display:inline-flex; align-items:center; gap:5px; background:var(--green); color:var(--cream); border-radius:999px; padding:4px 11px; font-family:var(--label); font-size:11.5px; margin-bottom:9px;}
+  .ev-date ion-icon{font-size:13px; color:var(--gold-2);}
+  .ev-title{font-family:var(--display); font-weight:700; font-size:17px; color:var(--green); margin:0; text-align:start;}
+  .ev-where{font-size:12.5px; color:var(--ink-dim); margin:5px 0 12px; display:flex; align-items:center; gap:4px; text-align:start;}
+  .ev-where ion-icon{font-size:14px;}
+  .ev-btn{background:var(--gold); color:var(--green-deep); border:none; border-radius:12px; padding:11px; font-family:var(--body); font-weight:700; font-size:13px; cursor:pointer; width:100%;}
+  .ev-btn.done{background:var(--cream-soft); color:var(--green);}
+
+  /* benefits */
+  .perk{background:var(--green); border-radius:var(--r); padding:18px; margin-bottom:16px; border:1px solid rgba(202,164,99,.4);}
+  .perk-head{display:flex; align-items:center; gap:6px; margin-bottom:10px; color:var(--gold); font-weight:700; font-size:13px;}
+  .perk-row{display:flex; align-items:center; gap:8px; margin-top:7px; color:var(--cream); font-size:13px; text-align:start;}
+  .perk-row ion-icon{font-size:16px; color:var(--gold); flex:none;}
+  .section{font-family:var(--display); font-weight:700; font-size:16px; color:var(--green); margin:18px 0 8px; text-align:start;}
+  .group{background:#fff; border-radius:var(--r); border:1px solid rgba(12,58,43,.07); overflow:hidden;}
+  .svc{display:flex; align-items:center; gap:11px; padding:12px 14px; border-bottom:1px solid rgba(12,58,43,.05);}
+  .svc:last-child{border-bottom:none;}
+  .svc .ic{width:42px; height:42px; border-radius:999px; background:var(--cream-soft); display:flex; align-items:center; justify-content:center; flex:none;}
+  .svc .ic ion-icon{font-size:20px; color:var(--green);}
+  .svc .nm{flex:1; font-family:var(--body); font-weight:500; font-size:13px; color:var(--green); text-align:start;}
+  .svc .nm.lock{color:var(--ink-dim);}
+  .svc .locknote{font-size:11px; color:var(--ink-dim); margin-top:2px;}
+  .req{background:var(--gold); color:var(--green-deep); border:none; border-radius:999px; padding:7px 15px; font-family:var(--body); font-weight:700; font-size:13px; cursor:pointer;}
+  .lock-ic{font-size:16px; color:#b9b3a2;}
+
+  /* documents */
+  .doc{display:flex; align-items:center; gap:11px; padding:12px 14px; border-bottom:1px solid rgba(12,58,43,.05); cursor:pointer;}
+  .doc:last-child{border-bottom:none;}
+  .doc .ic{width:40px; height:40px; border-radius:12px; background:var(--cream-soft); display:flex; align-items:center; justify-content:center; flex:none;}
+  .doc .ic ion-icon{font-size:18px; color:var(--green);}
+  .doc .nm{flex:1; font-family:var(--body); font-weight:500; font-size:13px; color:var(--green); text-align:start;}
+  .doc .dt{font-family:var(--label); font-size:11px; color:var(--ink-dim); margin-top:2px;}
+  .doc>ion-icon{font-size:20px; color:var(--gold); flex:none;}
+
+  /* profile */
+  .pcard{background:#fff; border-radius:var(--r); padding:20px; display:flex; flex-direction:column; align-items:center; border:1px solid rgba(202,164,99,.25);}
+  .pcard .av{width:72px; height:72px; border-radius:999px; background:var(--green); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-weight:700; color:var(--gold); font-size:22px;}
+  .pcard .nm{font-family:var(--display); font-weight:700; font-size:22px; color:var(--green); margin:10px 0 0;}
+  .pcard .ph{font-family:var(--label); font-size:13px; color:var(--ink-dim); margin:2px 0 0;}
+  .pcard .bd{display:inline-flex; align-items:center; gap:5px; background:rgba(202,164,99,.16); border-radius:999px; padding:5px 12px; margin-top:10px; color:#a8823f; font-weight:700; font-size:13px;}
+  .fee{display:flex; align-items:center; justify-content:space-between; background:#fff; border-radius:16px; padding:14px; margin-top:12px; border:1px solid rgba(12,58,43,.07);}
+  .fee .l{font-size:13px; color:var(--ink-dim);}
+  .fee .v{font-family:var(--display); font-weight:700; font-size:18px; color:var(--green);}
+  .prow{display:flex; align-items:center; gap:11px; padding:14px; border-bottom:1px solid rgba(12,58,43,.05); cursor:pointer;}
+  .prow:last-child{border-bottom:none;}
+  .prow .ic{width:38px; height:38px; border-radius:12px; background:var(--cream-soft); display:flex; align-items:center; justify-content:center; flex:none;}
+  .prow .ic ion-icon{font-size:18px; color:var(--green);}
+  .prow .l{flex:1; font-family:var(--body); font-weight:500; font-size:14px; color:var(--green); text-align:start;}
+  .prow>ion-icon{font-size:18px; color:var(--ink-dim);}
+  .logout{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:18px; padding:15px; border-radius:14px; border:1px solid rgba(179,84,63,.3); background:none; color:var(--danger); font-family:var(--body); font-weight:700; font-size:14px; cursor:pointer; width:100%;}
+
+  .back{display:inline-flex; align-items:center; gap:5px; background:none; border:none; color:var(--green); font-family:var(--body); font-weight:500; font-size:13px; cursor:pointer; padding:0; margin-bottom:8px;}
+  .back ion-icon{font-size:17px;}
+
+  /* ===== opening sequence (real flow) ===== */
+  .opening{position:absolute; inset:0; z-index:60; overflow:hidden; border-radius:44px;}
+  .login-lang{position:absolute; top:52px; inset-inline-end:16px; z-index:8;}
+  .skip{position:absolute; top:54px; inset-inline-start:16px; z-index:8; background:rgba(0,0,0,.18); border:none; color:var(--cream); font-family:var(--body); font-size:12.5px; padding:6px 14px; border-radius:999px; cursor:pointer; backdrop-filter:blur(4px);}
+  .opening.at-card .skip{display:none;}
+
+  /* phase 1 — deep green intro */
+  .intro-green{position:absolute; inset:0; background:#0a241b; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3; transition:opacity .7s ease; opacity:1;}
+  .opening.cream .intro-green{opacity:0; pointer-events:none;}
+  .mg-logo{width:44%; max-width:190px; height:auto; opacity:0;}
+  .opening.play .mg-logo{animation:mgFade 1.5s ease .5s forwards;}
+  @keyframes mgFade{from{opacity:0; transform:scale(.99);} to{opacity:1; transform:scale(1);}}
+  .mg-tag{display:flex; align-items:center; gap:7px; margin-top:14px;}
+  .mg-tag .w{font-family:var(--serif); font-size:13px; color:#d8b46a; letter-spacing:.5px; clip-path:inset(0 0 0 100%); opacity:0;}
+  .mg-tag[dir="ltr"] .w{clip-path:inset(0 100% 0 0);}
+  .opening.play .mg-tag .w{animation:writeWord .6s ease forwards;}
+  @keyframes writeWord{to{clip-path:inset(0 0 0 0); opacity:1;}}
+  .mg-tag .dot{font-family:var(--serif); font-size:13px; color:#d8b46a; opacity:0;}
+  .opening.play .mg-tag .dot{animation:fadeIn .3s ease forwards;}
+  .mg-tag .rule{width:26px; height:1px; background:linear-gradient(90deg,transparent,#d8b46a,transparent); opacity:0;}
+  .opening.play .mg-tag .rule{animation:fadeIn .65s ease 2.6s forwards;}
+  @keyframes fadeIn{to{opacity:1;}}
+
+  /* phase 2/3 — club cream + video + login card */
+  .club-cream{position:absolute; inset:0; background:#F3EFE4; z-index:2;}
+  .rise-logo{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transform:translateY(0); transition:transform .9s cubic-bezier(.5,0,.2,1);}
+  .opening.at-card .rise-logo{transform:translateY(-28%);}
+  .club-video{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#F3EFE4; opacity:1; transition:opacity .4s ease; z-index:4;}
+  .opening.video-done .club-video{opacity:0; pointer-events:none;}
+
+  .login-card{position:absolute; left:16px; right:16px; bottom:11%; z-index:6;
+    background:rgba(8,28,21,.72); border:1px solid rgba(202,164,99,.55); border-radius:var(--r);
+    padding:20px 18px; box-shadow:0 16px 40px -12px rgba(58,51,32,.5);
+    transform:translateY(60%); opacity:0; transition:transform .85s cubic-bezier(.5,0,.15,1), opacity .6s ease;}
+  .opening.at-card .login-card{transform:translateY(0); opacity:1;}
+  .login-card h2{font-family:var(--display); font-weight:700; color:var(--cream); font-size:18px; margin:0; text-align:center;}
+  .login-card .note{font-family:var(--body); font-size:12.5px; color:var(--cream-dim); text-align:center; margin:6px 0 0; line-height:1.6;}
+  .login-card .note b{color:var(--cream); font-weight:700;}
+  .lc-inputrow{display:flex; gap:9px; margin-top:16px; flex-direction:row; direction:ltr;}
+  .prefix{height:52px; padding:0 13px; display:flex; align-items:center; justify-content:center; border-radius:13px; border:1px solid rgba(202,164,99,.38); background:rgba(246,241,227,.1); color:var(--cream); font-family:var(--body); font-weight:500; font-size:15px; flex:none;}
+  .lc-input{flex:1; min-width:0; height:52px; padding:0 14px; border-radius:13px; border:1px solid rgba(202,164,99,.38); background:rgba(246,241,227,.1); color:var(--cream); font-family:var(--body); font-size:16px; outline:none; letter-spacing:1px; text-align:left;}
+  .lc-input::placeholder{color:rgba(246,241,227,.45);}
+  .otp-row{display:flex; gap:8px; margin-top:16px; direction:ltr;}
+  .otp-box{flex:1; min-width:0; height:56px; border-radius:13px; border:1px solid rgba(202,164,99,.38); background:rgba(246,241,227,.1); color:var(--cream); font-family:var(--display); font-weight:700; font-size:22px; text-align:center; outline:none;}
+  .otp-box:focus{border-color:var(--gold); background:rgba(202,164,99,.18);}
+  .lc-btn{width:100%; height:52px; margin-top:16px; border:none; border-radius:14px; background:var(--gold); color:var(--green-deep); font-family:var(--body); font-weight:700; font-size:15px; letter-spacing:.5px; cursor:pointer;}
+  .lc-btn:active{transform:scale(.99);}
+  .lc-back{display:inline-flex; align-items:center; gap:3px; background:none; border:none; color:var(--cream-dim); font-family:var(--body); font-size:13px; cursor:pointer; padding:0; margin-bottom:8px;}
+  .lc-back ion-icon{font-size:16px;}
+  .lc-resend{display:block; width:100%; background:none; border:none; color:var(--cream-dim); font-family:var(--body); font-size:13px; margin-top:13px; cursor:pointer; text-align:center;}
+  .lc-foot{display:flex; align-items:center; justify-content:center; gap:6px; margin-top:16px; color:var(--cream-dim); font-family:var(--label); font-size:10.5px; letter-spacing:1.2px;}
+  .lc-foot ion-icon{font-size:12px;}
+
+  /* floating tab bar */
+  .tabbar{position:absolute; left:0; right:0; bottom:20px; display:flex; justify-content:center; z-index:25; pointer-events:none;}
+  .tabbar .bar{pointer-events:auto; width:86%; height:62px; background:var(--green); border-radius:999px; border:1px solid rgba(202,164,99,.35); display:flex; align-items:center; justify-content:space-around; padding:0 8px; box-shadow:0 14px 26px -8px rgba(12,58,43,.6);}
+  .tab{flex:1; display:flex; align-items:center; justify-content:center; cursor:pointer; height:100%;}
+  .tab .w{width:44px; height:44px; border-radius:999px; display:flex; align-items:center; justify-content:center;}
+  .tab .w ion-icon{font-size:23px; color:var(--cream-dim);}
+  .tab.active .w{background:rgba(202,164,99,.16);}
+  .tab.active .w ion-icon{color:var(--gold);}
+
+  /* toast */
+  .toast{position:fixed; bottom:26px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--green-deep); color:var(--cream); padding:12px 20px; border-radius:999px; font-family:var(--body); font-size:13.5px; border:1px solid rgba(202,164,99,.4); opacity:0; transition:.25s; z-index:200; max-width:90vw; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,.4);}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* sheets / modal */
+  .overlay{position:fixed; inset:0; background:rgba(6,18,13,.5); z-index:150; display:none; align-items:flex-end; justify-content:center;}
+  .overlay.show{display:flex;}
+  .sheet{background:var(--cream); width:min(390px,94vw); border-radius:26px 26px 0 0; padding:18px 18px calc(18px + env(safe-area-inset-bottom)); margin-bottom:0; animation:up .25s ease;}
+  @keyframes up{from{transform:translateY(40px); opacity:.3;} to{transform:translateY(0); opacity:1;}}
+  .sheet h3{font-family:var(--display); font-weight:700; color:var(--green); margin:4px 0 14px; text-align:center; font-size:18px;}
+  .lang-opt{display:flex; align-items:center; gap:12px; padding:14px; border-radius:14px; background:#fff; border:1px solid rgba(12,58,43,.07); margin-bottom:9px; cursor:pointer;}
+  .lang-opt.sel{border-color:var(--gold); background:rgba(202,164,99,.1);}
+  .lang-opt .flag{font-size:22px;}
+  .lang-opt .ln{flex:1; font-weight:500; font-size:15px; color:var(--green); text-align:start;}
+  .lang-opt .chk{color:var(--gold); font-size:20px;}
+
+  /* info modal (build status) */
+  .info-overlay{position:fixed; inset:0; background:rgba(6,18,13,.6); z-index:160; display:none; align-items:center; justify-content:center; padding:18px;}
+  .info-overlay.show{display:flex;}
+  .info{background:var(--cream); width:min(380px,94vw); max-height:80vh; overflow:auto; border-radius:24px; padding:22px;}
+  .info h3{font-family:var(--display); font-weight:700; color:var(--green); margin:0 0 4px; font-size:20px; text-align:start;}
+  .info .meta{font-family:var(--label); font-size:11px; color:var(--ink-dim); margin-bottom:14px; text-align:start;}
+  .info .ttl{font-weight:700; color:var(--green); font-size:13px; margin:14px 0 6px; text-align:start;}
+  .info li{display:flex; gap:8px; align-items:flex-start; font-size:13px; color:var(--ink); margin-bottom:6px; list-style:none; text-align:start;}
+  .info ul{margin:0; padding:0;}
+  .info li ion-icon{font-size:16px; flex:none; margin-top:1px;}
+  .info .done ion-icon{color:#2e8b57;}
+  .info .pend ion-icon{color:var(--gold);}
+  .info .close{margin-top:16px;}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="brandline">MAOZ&nbsp;FOUNDERS&nbsp;CLUB · אב-טיפוס אינטראקטיבי</div>
+    <button class="pillbtn" onclick="openInfo()"><ion-icon name="information-circle-outline"></ion-icon><span id="statusBtnLabel">סטטוס פיתוח</span></button>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="device">
+      <div class="screen" id="screen" dir="rtl">
+        <div class="notch"></div>
+        <div class="statusbar">
+          <span class="t">9:41</span>
+          <span class="r"><ion-icon name="cellular"></ion-icon><ion-icon name="wifi"></ion-icon><ion-icon name="battery-full"></ion-icon></span>
+        </div>
+        <div class="scroll" id="scroll"></div>
+        <div class="tabbar"><div class="bar" id="tabbar"></div></div>
+
+        <div class="opening" id="opening">
+          <div class="login-lang"><div class="icbtn" onclick="openLang()" title="Language"><ion-icon name="language-outline"></ion-icon></div></div>
+          <button class="skip" id="skipBtn" onclick="skipIntro()">דלג</button>
+          <div class="intro-green" id="introGreen">
+            <img class="mg-logo" src="maoz-app/assets/brand/maoz-group.png" alt="MAOZ GROUP">
+            <div class="mg-tag" id="mgTag"></div>
+          </div>
+          <div class="club-cream" id="clubCream">
+            <img class="rise-logo" src="maoz-app/assets/brand/club-last.png" alt="MAOZ Founders Club">
+            <video class="club-video" id="clubVideo" muted playsinline preload="auto">
+              <source src="maoz-app/assets/brand/club-write.mp4" type="video/mp4">
+            </video>
+            <div class="login-card" id="loginCard"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="overlay" id="langOverlay" onclick="if(event.target===this)closeLang()">
+    <div class="sheet">
+      <h3 id="langTitle">בחירת שפה</h3>
+      <div id="langList"></div>
+    </div>
+  </div>
+
+  <div class="info-overlay" id="infoOverlay" onclick="if(event.target===this)closeInfo()">
+    <div class="info" id="infoBox"></div>
+  </div>
+
+<script>
+/* ---------- i18n + data ---------- */
+const LANGS = {
+  he:{name:`עברית`, flag:`🇮🇱`, dir:`rtl`},
+  en:{name:`English`, flag:`🇬🇧`, dir:`ltr`},
+  fr:{name:`Français`, flag:`🇫🇷`, dir:`ltr`},
+  es:{name:`Español`, flag:`🇪🇸`, dir:`ltr`},
+};
+
+const UI = {
+  loginTag:{he:`נדל״ן · השקעות · קהילה`,en:`Real estate · Investments · Community`,fr:`Immobilier · Investissements · Communauté`,es:`Inmobiliaria · Inversiones · Comunidad`},
+  loginTitle:{he:`כניסה לאזור האישי`,en:`Sign in to your area`,fr:`Accès à votre espace`,es:`Acceso a tu área`},
+  loginNote:{he:`הזינו את מספר הטלפון הרשום במועדון`,en:`Enter the phone number registered with the club`,fr:`Saisissez le numéro enregistré au club`,es:`Introduce el teléfono registrado en el club`},
+  loginPhone:{he:`50-000-0000`,en:`50-000-0000`,fr:`50-000-0000`,es:`50-000-0000`},
+  loginSend:{he:`שלחו לי קוד`,en:`Send me a code`,fr:`Envoyez-moi un code`,es:`Envíame un código`},
+  loginCodeTitle:{he:`הזינו את הקוד`,en:`Enter the code`,fr:`Saisissez le code`,es:`Introduce el código`},
+  loginCodeNote:{he:`שלחנו קוד בן 6 ספרות אל`,en:`We sent a 6-digit code to`,fr:`Nous avons envoyé un code à 6 chiffres au`,es:`Enviamos un código de 6 dígitos al`},
+  loginChange:{he:`שינוי מספר`,en:`Change number`,fr:`Changer de numéro`,es:`Cambiar número`},
+  loginEnter:{he:`כניסה`,en:`Enter`,fr:`Entrer`,es:`Entrar`},
+  loginResend:{he:`שליחת קוד חדש`,en:`Send a new code`,fr:`Renvoyer un code`,es:`Enviar nuevo código`},
+  loginSecure:{he:`כניסה מאובטחת · MAOZ GROUP`,en:`Secure sign-in · MAOZ GROUP`,fr:`Connexion sécurisée · MAOZ GROUP`,es:`Acceso seguro · MAOZ GROUP`},
+  skip:{he:`דלג`,en:`Skip`,fr:`Passer`,es:`Saltar`},
+  goodEvening:{he:`ערב טוב,`,en:`Good evening,`,fr:`Bonsoir,`,es:`Buenas noches,`},
+  memberSince:{he:`חבר/ה מאז`,en:`Member since`,fr:`Membre depuis`,es:`Miembro desde`},
+  balanceLabel:{he:`יתרה צבורה להשקעות עתידיות`,en:`Accrued balance for future investments`,fr:`Solde accumulé pour investissements futurs`,es:`Saldo acumulado para futuras inversiones`},
+  viewNew:{he:`לעיון בהשקעות חדשות`,en:`View new investments`,fr:`Voir les nouveaux investissements`,es:`Ver nuevas inversiones`},
+  qaMyInv:{he:`ההשקעות שלי`,en:`My investments`,fr:`Mes investissements`,es:`Mis inversiones`},
+  qaNewInv:{he:`השקעות חדשות`,en:`New investments`,fr:`Nouveaux investissements`,es:`Nuevas inversiones`},
+  qaDocs:{he:`מסמכים`,en:`Documents`,fr:`Documents`,es:`Documentos`},
+  qaNews:{he:`ניוזלטר רבעוני`,en:`Quarterly newsletter`,fr:`Lettre trimestrielle`,es:`Boletín trimestral`},
+  qaBenefits:{he:`הטבות המועדון`,en:`Club benefits`,fr:`Avantages du club`,es:`Beneficios del club`},
+  qaEvents:{he:`אירועים קרובים`,en:`Upcoming events`,fr:`Événements à venir`,es:`Próximos eventos`},
+  showAll:{he:`הצג הכל`,en:`See all`,fr:`Tout voir`,es:`Ver todo`},
+  invested:{he:`השקעה`,en:`Invested`,fr:`Investi`,es:`Invertido`},
+  clubServicesTitle:{he:`שירותי המועדון שלך`,en:`Your club services`,fr:`Vos services du club`,es:`Tus servicios del club`},
+  clubServicesSub:{he:`קונסיירז׳ VIP · ביטחון אישי · שמאי · יועץ משכנתאות · עו״ד · ביטוח`,en:`VIP concierge · personal security · appraiser · mortgage advisor · lawyer · insurance`,fr:`Conciergerie VIP · sécurité · expert · conseiller hypothécaire · avocat · assurance`,es:`Conserjería VIP · seguridad · tasador · asesor hipotecario · abogado · seguros`},
+  leaveRequest:{he:`להשארת פנייה`,en:`Submit a request`,fr:`Envoyer une demande`,es:`Enviar una solicitud`},
+  investSub:{he:`מעקב אחר הפרויקטים שהשקעת בהם`,en:`Track the projects you have invested in`,fr:`Suivez les projets dans lesquels vous avez investi`,es:`Sigue los proyectos en los que has invertido`},
+  newInvSub:{he:`הזדמנויות בלעדיות למשקיעי המועדון`,en:`Exclusive opportunities for club investors`,fr:`Opportunités exclusives pour les investisseurs du club`,es:`Oportunidades exclusivas para inversores del club`},
+  minInvest:{he:`השקעה מינ׳`,en:`Min. investment`,fr:`Invest. min.`,es:`Inversión mín.`},
+  expReturn:{he:`תשואה צפויה`,en:`Expected return`,fr:`Rendement attendu`,es:`Rentabilidad esperada`},
+  eventsSub:{he:`הזמנה לאירועי המועדון — הירשמו מראש`,en:`Invitations to club events — register in advance`,fr:`Invitations aux événements du club — inscrivez-vous à l’avance`,es:`Invitaciones a eventos del club — regístrate con antelación`},
+  register:{he:`הרשמה`,en:`Register`,fr:`S’inscrire`,es:`Inscribirse`},
+  registered:{he:`נרשמת ✓`,en:`Registered ✓`,fr:`Inscrit ✓`,es:`Inscrito ✓`},
+  docsTitle:{he:`המסמכים שלי`,en:`My documents`,fr:`Mes documents`,es:`Mis documentos`},
+  docsSub:{he:`העתקי מסמכים משפטיים וניוזלטרים`,en:`Copies of legal documents and newsletters`,fr:`Copies de documents juridiques et lettres d’information`,es:`Copias de documentos legales y boletines`},
+  legalSection:{he:`מסמכים משפטיים`,en:`Legal documents`,fr:`Documents juridiques`,es:`Documentos legales`},
+  benefitsSub:{he:`השאירו פנייה ונציג יחזור אליכם`,en:`Leave a request and a representative will get back to you`,fr:`Laissez une demande et un représentant vous recontactera`,es:`Deja una solicitud y un representante te contactará`},
+  tierWord:{he:`מסלול`,en:`Tier`,fr:`Formule`,es:`Nivel`},
+  yourBenefits:{he:`ההטבות שלך`,en:`your benefits`,fr:`vos avantages`,es:`tus beneficios`},
+  profServices:{he:`שירותי אנשי מקצוע`,en:`Professional services`,fr:`Services professionnels`,es:`Servicios profesionales`},
+  vipServices:{he:`שירותי VIP`,en:`VIP services`,fr:`Services VIP`,es:`Servicios VIP`},
+  requestBtn:{he:`פנייה`,en:`Request`,fr:`Demande`,es:`Solicitar`},
+  availOn:{he:`זמין במסלול PLATINUM`,en:`Available on PLATINUM tier`,fr:`Disponible sur la formule PLATINUM`,es:`Disponible en el nivel PLATINUM`},
+  profileTitle:{he:`הפרופיל שלי`,en:`My profile`,fr:`Mon profil`,es:`Mi perfil`},
+  annualFee:{he:`דמי חברות שנתיים`,en:`Annual membership fee`,fr:`Cotisation annuelle`,es:`Cuota anual de socio`},
+  rowNotif:{he:`התראות`,en:`Notifications`,fr:`Notifications`,es:`Notificaciones`},
+  rowSecurity:{he:`אבטחה והתחברות`,en:`Security & login`,fr:`Sécurité et connexion`,es:`Seguridad e inicio de sesión`},
+  rowLang:{he:`שפה`,en:`Language`,fr:`Langue`,es:`Idioma`},
+  rowSupport:{he:`תמיכה ויצירת קשר`,en:`Support & contact`,fr:`Assistance et contact`,es:`Soporte y contacto`},
+  logout:{he:`התנתקות`,en:`Log out`,fr:`Déconnexion`,es:`Cerrar sesión`},
+  langTitle:{he:`בחירת שפה`,en:`Choose language`,fr:`Choisir la langue`,es:`Elegir idioma`},
+  statusBtn:{he:`סטטוס פיתוח`,en:`Build status`,fr:`État du projet`,es:`Estado del proyecto`},
+  /* toasts */
+  tRequest:{he:`הפנייה נשלחה — נציג המועדון יחזור אליך בהקדם`,en:`Request sent — a club representative will contact you shortly`,fr:`Demande envoyée — un représentant vous contactera bientôt`,es:`Solicitud enviada — un representante te contactará pronto`},
+  tDownload:{he:`המסמך נפתח להורדה`,en:`Document opened for download`,fr:`Document ouvert pour téléchargement`,es:`Documento abierto para descarga`},
+  tNoNotif:{he:`אין התראות חדשות`,en:`No new notifications`,fr:`Aucune nouvelle notification`,es:`Sin notificaciones nuevas`},
+  tLogout:{he:`התנתקת מהמועדון`,en:`You have logged out`,fr:`Vous êtes déconnecté`,es:`Has cerrado sesión`},
+  tCodeSent:{he:`קוד נשלח ב-SMS (לדמו: כל קוד יתאים)`,en:`Code sent by SMS (demo: any code works)`,fr:`Code envoyé par SMS (démo : tout code fonctionne)`,es:`Código enviado por SMS (demo: cualquier código vale)`},
+  tRegistered:{he:`נרשמת לאירוע — אישור נשלח במייל`,en:`Registered — confirmation sent by email`,fr:`Inscrit — confirmation envoyée par e-mail`,es:`Inscrito — confirmación enviada por correo`},
+  tLocked:{he:`זמין במסלול גבוה יותר`,en:`Available on a higher tier`,fr:`Disponible sur une formule supérieure`,es:`Disponible en un nivel superior`},
+  tSoon:{he:`בקרוב — מסך זה בפיתוח`,en:`Coming soon — screen in progress`,fr:`Bientôt — écran en cours`,es:`Próximamente — pantalla en desarrollo`},
+};
+
+const member = {
+  name:{he:`אנה סוויד`,en:`Anna Sweed`,fr:`Anna Sweed`,es:`Anna Sweed`},
+  initials:{he:`א״ס`,en:`AS`,fr:`AS`,es:`AS`},
+  tier:`GOLD`, since:2026, balance:485000, phone:`052-355-5077`,
+};
+
+const STATUS = {plan:{he:`בתכנון`,en:`Planning`,fr:`En projet`,es:`En planificación`}};
+
+const projects = [
+  { name:`WEST רמת השרון`,
+    loc:{he:`רמת השרון`,en:`Ramat HaSharon`,fr:`Ramat HaSharon`,es:`Ramat HaSharon`},
+    status:`plan`, invested:750000, date:`12.06.2026`,
+    upd:{he:`קרקע הוכרזה בותמ״ל, ממתינים להפקדת התוכנית`,en:`Land declared by the national housing committee (VATMAL); awaiting plan deposit`,fr:`Terrain déclaré par le comité national du logement (VATMAL) ; en attente du dépôt du plan`,es:`Terreno declarado por el comité nacional de vivienda (VATMAL); a la espera del depósito del plan`} },
+  { name:`THE HARBUR`,
+    loc:{he:`פיראוס, יוון`,en:`Piraeus, Greece`,fr:`Le Pirée, Grèce`,es:`El Pireo, Grecia`},
+    status:`plan`, invested:400000, date:`03.06.2026`,
+    upd:{he:`צפי תחילת בניה – יוני 2027`,en:`Construction expected to begin June 2027`,fr:`Début des travaux prévu en juin 2027`,es:`Inicio de obra previsto para junio de 2027`} },
+];
+
+const newInv = [
+  { name:{he:`מגדל יוקרה · תל אביב`,en:`Luxury Tower · Tel Aviv`,fr:`Tour de luxe · Tel-Aviv`,es:`Torre de lujo · Tel Aviv`}, min:500000, ret:`14%–18%` },
+  { name:{he:`פארק לוגיסטי · קיסריה`,en:`Logistics Park · Caesarea`,fr:`Parc logistique · Césarée`,es:`Parque logístico · Cesarea`}, min:250000, ret:`11%–13%` },
+];
+
+const events = [
+  { date:`24.07.2026`,
+    title:{he:`ערב משקיעים בלעדי`,en:`Exclusive Investors Evening`,fr:`Soirée investisseurs exclusive`,es:`Velada exclusiva de inversores`},
+    where:{he:`מלון The Norman, תל אביב`,en:`The Norman Hotel, Tel Aviv`,fr:`Hôtel The Norman, Tel-Aviv`,es:`Hotel The Norman, Tel Aviv`} },
+  { date:`12.09.2026`,
+    title:{he:`סיור פרויקט THE HARBUR`,en:`THE HARBUR Project Tour`,fr:`Visite du projet THE HARBUR`,es:`Visita al proyecto THE HARBUR`},
+    where:{he:`פיראוס, יוון`,en:`Piraeus, Greece`,fr:`Le Pirée, Grèce`,es:`El Pireo, Grecia`} },
+  { date:`05.11.2026`,
+    title:{he:`כנס נדל״ן בינלאומי`,en:`International Real-Estate Summit`,fr:`Sommet immobilier international`,es:`Cumbre inmobiliaria internacional`},
+    where:{he:`מרכז הכנסים, תל אביב`,en:`Convention Center, Tel Aviv`,fr:`Centre de congrès, Tel-Aviv`,es:`Centro de convenciones, Tel Aviv`} },
+];
+
+const docsLegal = [
+  { date:`14.03.2026`, name:{he:`הסכם השקעה — WEST רמת השרון`,en:`Investment Agreement — WEST Ramat HaSharon`,fr:`Contrat d’investissement — WEST Ramat HaSharon`,es:`Contrato de inversión — WEST Ramat HaSharon`} },
+  { date:`14.03.2026`, name:{he:`נספח בטחונות — WEST רמת השרון`,en:`Collateral Annex — WEST Ramat HaSharon`,fr:`Annexe de garanties — WEST Ramat HaSharon`,es:`Anexo de garantías — WEST Ramat HaSharon`} },
+  { date:`02.05.2026`, name:{he:`הסכם השקעה — THE HARBUR`,en:`Investment Agreement — THE HARBUR`,fr:`Contrat d’investissement — THE HARBUR`,es:`Contrato de inversión — THE HARBUR`} },
+];
+const docsNews = [
+  { date:`01.06.2026`, name:{he:`ניוזלטר רבעוני — Q2 2026`,en:`Quarterly Newsletter — Q2 2026`,fr:`Lettre trimestrielle — T2 2026`,es:`Boletín trimestral — T2 2026`} },
+  { date:`01.03.2026`, name:{he:`ניוזלטר רבעוני — Q1 2026`,en:`Quarterly Newsletter — Q1 2026`,fr:`Lettre trimestrielle — T1 2026`,es:`Boletín trimestral — T1 2026`} },
+];
+
+const perks = [
+  {he:`כל הטבות SILVER`,en:`All SILVER benefits`,fr:`Tous les avantages SILVER`,es:`Todos los beneficios SILVER`},
+  {he:`גישה מוקדמת להשקעות חדשות`,en:`Early access to new investments`,fr:`Accès anticipé aux nouveaux investissements`,es:`Acceso anticipado a nuevas inversiones`},
+  {he:`שירות אנשי מקצוע (שמאי · יועץ משכנתאות · עו״ד · ביטוח)`,en:`Professional services (appraiser · mortgage advisor · lawyer · insurance)`,fr:`Services professionnels (expert · conseiller hypothécaire · avocat · assurance)`,es:`Servicios profesionales (tasador · asesor hipotecario · abogado · seguros)`},
+  {he:`ליווי אישי`,en:`Personal guidance`,fr:`Accompagnement personnel`,es:`Acompañamiento personal`},
+];
+const professionals = [
+  {icon:`calculator-outline`, tier:`GOLD`, name:{he:`שמאי מקרקעין`,en:`Real-estate appraiser`,fr:`Expert immobilier`,es:`Tasador inmobiliario`}},
+  {icon:`trending-up-outline`, tier:`GOLD`, name:{he:`יועץ פיננסי / משכנתאות`,en:`Financial / mortgage advisor`,fr:`Conseiller financier / hypothécaire`,es:`Asesor financiero / hipotecario`}},
+  {icon:`briefcase-outline`, tier:`GOLD`, name:{he:`עורך/ת דין`,en:`Lawyer`,fr:`Avocat`,es:`Abogado`}},
+  {icon:`shield-checkmark-outline`, tier:`GOLD`, name:{he:`סוכן/ת ביטוח`,en:`Insurance agent`,fr:`Agent d’assurance`,es:`Agente de seguros`}},
+];
+const vipSvc = [
+  {icon:`sparkles-outline`, tier:`PLATINUM`, name:{he:`שירות קונסיירז׳ VIP`,en:`VIP concierge service`,fr:`Service de conciergerie VIP`,es:`Servicio de conserjería VIP`}},
+  {icon:`shield-outline`, tier:`PLATINUM`, name:{he:`שירות ביטחון אישי`,en:`Personal security service`,fr:`Service de sécurité personnelle`,es:`Servicio de seguridad personal`}},
+];
+const FEES = {GOLD:3500};
+const TIER_RANK = {SILVER:0, GOLD:1, PLATINUM:2};
+
+const profileRows = [
+  {icon:`notifications-outline`, key:`rowNotif`},
+  {icon:`lock-closed-outline`, key:`rowSecurity`},
+  {icon:`language-outline`, key:`rowLang`, action:`lang`},
+  {icon:`help-circle-outline`, key:`rowSupport`},
+];
+
+/* ---------- state ---------- */
+const state = { screen:`home`, lang:`he`, reg:{}, loginStep:`phone`, phone:`` };
+const t = (k)=> (UI[k]||{})[state.lang] || (UI[k]||{}).he || k;
+const L = (o)=> o[state.lang] || o.he;
+const fmt = (n)=> `₪` + n.toLocaleString(`en-US`);
+
+/* ---------- opening sequence (MAOZ GROUP intro → club video → login) ---------- */
+let openTimers = [];
+function clearOpenTimers(){ openTimers.forEach(clearTimeout); openTimers = []; }
+const later = (fn,ms)=> openTimers.push(setTimeout(fn,ms));
+
+function buildTagline(){
+  const dir = LANGS[state.lang].dir;
+  const words = L(UI.loginTag).split(' · ');
+  const tag = document.getElementById('mgTag');
+  tag.setAttribute('dir', dir);
+  document.getElementById('skipBtn').textContent = t('skip');
+  let html = `<span class="rule" style="animation-delay:4.2s"></span>`;
+  words.forEach((w,i)=>{
+    if(i>0) html += `<span class="dot" style="animation-delay:${(2.2+i*0.7-0.15).toFixed(2)}s">·</span>`;
+    html += `<span class="w" style="animation-delay:${(2.2+i*0.7).toFixed(2)}s">${w}</span>`;
+  });
+  html += `<span class="rule" style="animation-delay:4.2s"></span>`;
+  tag.innerHTML = html;
+}
+
+function loginCardHTML(){
+  const dir = LANGS[state.lang].dir;
+  const phone = state.phone || member.phone;
+  if(state.loginStep === 'code'){
+    return `
+      <button class="lc-back" onclick="backToPhone()"><ion-icon name="chevron-${dir==='rtl'?'forward':'back'}"></ion-icon>${t('loginChange')}</button>
+      <h2>${t('loginCodeTitle')}</h2>
+      <p class="note">${t('loginCodeNote')}<br><b>+972 ${phone}</b></p>
+      <div class="otp-row">${[0,1,2,3,4,5].map((i)=>`<input class="otp-box" maxlength="1" inputmode="numeric" oninput="otpNext(this,${i})">`).join('')}</div>
+      <button class="lc-btn" onclick="doLogin()">${t('loginEnter')}</button>
+      <button class="lc-resend" onclick="toast(t('tCodeSent'))">${t('loginResend')}</button>
+      <div class="lc-foot"><ion-icon name="lock-closed"></ion-icon>${t('loginSecure')}</div>`;
+  }
+  return `
+    <h2>${t('loginTitle')}</h2>
+    <p class="note">${t('loginNote')}</p>
+    <div class="lc-inputrow">
+      <div class="prefix">+972</div>
+      <input id="lcPhone" class="lc-input" type="tel" inputmode="tel" placeholder="${t('loginPhone')}" value="${state.phone}">
+    </div>
+    <button class="lc-btn" onclick="sendCode()">${t('loginSend')}</button>
+    <div class="lc-foot"><ion-icon name="lock-closed"></ion-icon>${t('loginSecure')}</div>`;
+}
+function renderLoginCard(){
+  const card = document.getElementById('loginCard');
+  card.setAttribute('dir', LANGS[state.lang].dir);
+  card.innerHTML = loginCardHTML();
+}
+function otpNext(el,i){
+  el.value = el.value.replace(/\D/g,'').slice(0,1);
+  if(el.value && i<5){ const n = el.parentElement.children[i+1]; if(n) n.focus(); }
+}
+function backToPhone(){ state.loginStep='phone'; renderLoginCard(); }
+function sendCode(){
+  const el = document.getElementById('lcPhone');
+  state.phone = (el && el.value.trim()) ? el.value.trim() : member.phone;
+  state.loginStep = 'code';
+  renderLoginCard();
+  toast(t('tCodeSent'));
+}
+function revealCard(){
+  const op = document.getElementById('opening');
+  const v = document.getElementById('clubVideo'); try{ v.pause(); }catch(e){}
+  op.classList.add('video-done','at-card');
+}
+function startOpening(skipGreen){
+  clearOpenTimers();
+  const op = document.getElementById('opening');
+  state.loginStep = 'phone';
+  buildTagline();
+  renderLoginCard();
+  op.style.display = 'block';
+  op.className = 'opening'; // reset
+  // restart CSS animations
+  void op.offsetWidth;
+  document.documentElement.lang = state.lang;
+  const v = document.getElementById('clubVideo');
+  if(skipGreen){
+    op.classList.add('play','cream','at-card');
+    try{ v.currentTime = 1e6; }catch(e){}
+    return;
+  }
+  op.classList.add('play');
+  // words+rules settle ~4.85s; linger ~3s on the MAOZ GROUP screen, then hand off to cream + start video.
+  later(()=>{
+    op.classList.add('cream');
+    try{
+      v.currentTime = 0;
+      const p = v.play();
+      if(p && p.catch) p.catch(()=>{ later(revealCard, 1000); }); // autoplay blocked → reveal shortly
+    }catch(e){ later(revealCard, 1000); }
+  }, 7800);
+  // Let the ~10.8s writing video FINISH, hold ~2.5s, then rise + bring in the card.
+  v.onended = ()=> later(revealCard, 2500);
+  // Ultimate fallback only if 'ended' is missed (cream@7.8s + ~10.8s video + 2.5s hold + buffer).
+  later(revealCard, 22500);
+}
+function skipIntro(){
+  clearOpenTimers();
+  const op = document.getElementById('opening');
+  const v = document.getElementById('clubVideo'); try{ v.pause(); }catch(e){}
+  op.classList.add('play','cream','video-done','at-card');
+}
+function doLogin(){
+  clearOpenTimers();
+  const op = document.getElementById('opening');
+  op.style.display = 'none';
+  state.screen = 'home';
+  state.loginStep = 'phone';
+  render();
+}
+function openingVisible(){ const op=document.getElementById('opening'); return op && op.style.display!=='none'; }
+
+/* ---------- screens ---------- */
+function homeScreen(){
+  const m = member;
+  return `
+  <div class="home-head">
+    <div style="flex:1; min-width:0">
+      <p class="hello">${t(`goodEvening`)}</p>
+      <p class="name">${L(m.name)}</p>
+    </div>
+    <div class="icbtn" onclick="openLang()" title="Language"><ion-icon name="language-outline"></ion-icon></div>
+    <div class="icbtn" onclick="toast(t('tNoNotif'))"><ion-icon name="notifications-outline"></ion-icon><span class="dot"></span></div>
+    <div class="avatar">${L(m.initials)}</div>
+  </div>
+
+  <div class="tier">
+    <div class="between">
+      <span class="club">MAOZ FOUNDERS CLUB</span>
+      <span class="badge"><ion-icon name="diamond"></ion-icon>${m.tier}</span>
+    </div>
+    <p class="tname">${L(m.name)}</p>
+    <div class="between" style="align-items:flex-end; margin-top:8px">
+      <span class="since">${t(`memberSince`)} ${m.since}</span>
+      <span class="mono">M</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px; padding:18px">
+    <div class="between">
+      <div style="flex:1">
+        <p class="bal-label">${t(`balanceLabel`)}</p>
+        <p class="bal-val">${fmt(m.balance)}</p>
+      </div>
+      <ion-icon name="wallet-outline" style="font-size:26px; color:var(--gold)"></ion-icon>
+    </div>
+    <button class="soft-btn" style="margin-top:12px" onclick="go('invest')">
+      <ion-icon name="arrow-${state.lang==='he'?'back':'forward'}"></ion-icon>${t(`viewNew`)}
+    </button>
+  </div>
+
+  <div class="qgrid">
+    ${qa(`business-outline`,t(`qaMyInv`),`invest`)}
+    ${qa(`trending-up-outline`,t(`qaNewInv`),`invest`)}
+    ${qa(`document-text-outline`,t(`qaDocs`),`docs`)}
+    ${qa(`newspaper-outline`,t(`qaNews`),`docs`)}
+    ${qa(`diamond-outline`,t(`qaBenefits`),`benefits`)}
+    ${qa(`calendar-outline`,t(`qaEvents`),`events`)}
+  </div>
+
+  <div class="sec-head">
+    <span class="sec-title">${t(`qaMyInv`)}</span>
+    <span class="sec-link" onclick="go('invest')">${t(`showAll`)}</span>
+  </div>
+  ${projects.map(projCard).join(``)}
+
+  <div class="card" style="margin-top:14px; text-align:center; padding:20px; border-color:rgba(202,164,99,.3)">
+    <ion-icon name="sparkles-outline" style="font-size:22px; color:var(--gold)"></ion-icon>
+    <p style="font-family:var(--display); font-weight:700; font-size:17px; color:var(--green); margin:8px 0 0">${t(`clubServicesTitle`)}</p>
+    <p style="font-size:13px; color:var(--ink-dim); margin:6px 0 0; line-height:1.6">${t(`clubServicesSub`)}</p>
+    <button class="gold-btn" style="margin-top:14px; width:auto; padding-left:28px; padding-right:28px" onclick="go('benefits')">${t(`leaveRequest`)}</button>
+  </div>`;
+}
+
+function qa(icon,label,target){
+  return `<div class="qa" onclick="go('${target}')"><div class="ic"><ion-icon name="${icon}"></ion-icon></div><span class="lbl">${label}</span></div>`;
+}
+
+function projCard(p){
+  return `
+  <div class="card">
+    <div class="between" style="align-items:flex-start">
+      <div style="flex:1; min-width:0">
+        <p class="proj-name">${p.name}</p>
+        <p class="proj-loc"><ion-icon name="location-outline"></ion-icon>${L(p.loc)}</p>
+      </div>
+      <span class="pill">${L(STATUS[p.status])}</span>
+    </div>
+    <p class="proj-upd">${L(p.upd)}</p>
+    <div class="proj-foot">
+      <span class="proj-inv">${t(`invested`)}: <b>${fmt(p.invested)}</b></span>
+      <span class="proj-date">${p.date}</span>
+    </div>
+  </div>`;
+}
+
+function investScreen(){
+  return `
+  <h1 class="h1">${t(`qaMyInv`)}</h1>
+  <p class="sub">${t(`investSub`)}</p>
+  ${projects.map(projCard).join(``)}
+  <h1 class="h1" style="margin-top:22px">${t(`qaNewInv`)}</h1>
+  <p class="sub">${t(`newInvSub`)}</p>
+  ${newInv.map((n)=>`
+    <div class="new-card" onclick="toast(t('tRequest'))">
+      <div style="flex:1; min-width:0">
+        <p class="proj-name" style="font-size:15px">${L(n.name)}</p>
+        <p class="new-meta">${t(`minInvest`)} ${fmt(n.min)} · ${t(`expReturn`)} ${n.ret}</p>
+      </div>
+      <ion-icon name="chevron-${state.lang==='he'?'back':'forward'}"></ion-icon>
+    </div>`).join(``)}`;
+}
+
+function eventsScreen(){
+  return `
+  <button class="back" onclick="go('home')"><ion-icon name="chevron-${state.lang==='he'?'forward':'back'}"></ion-icon>${L(member.name)}</button>
+  <h1 class="h1">${t(`qaEvents`)}</h1>
+  <p class="sub">${t(`eventsSub`)}</p>
+  ${events.map((e,i)=>`
+    <div class="ev-card">
+      <span class="ev-date"><ion-icon name="calendar-clear-outline"></ion-icon>${e.date}</span>
+      <p class="ev-title">${L(e.title)}</p>
+      <p class="ev-where"><ion-icon name="location-outline"></ion-icon>${L(e.where)}</p>
+      <button class="ev-btn ${state.reg[i]?'done':''}" onclick="registerEvent(${i})">${state.reg[i]?t(`registered`):t(`register`)}</button>
+    </div>`).join(``)}`;
+}
+
+function docsScreen(){
+  return `
+  <h1 class="h1">${t(`docsTitle`)}</h1>
+  <p class="sub">${t(`docsSub`)}</p>
+  <p class="section">${t(`legalSection`)}</p>
+  <div class="group">${docsLegal.map(docRow(`document-text-outline`)).join(``)}</div>
+  <p class="section">${t(`qaNews`)}</p>
+  <div class="group">${docsNews.map(docRow(`newspaper-outline`)).join(``)}</div>`;
+}
+function docRow(icon){
+  return (d)=>`
+    <div class="doc" onclick="toast(t('tDownload'))">
+      <div class="ic"><ion-icon name="${icon}"></ion-icon></div>
+      <div style="flex:1; min-width:0"><p class="nm">${L(d.name)}</p><p class="dt">${d.date}</p></div>
+      <ion-icon name="download-outline"></ion-icon>
+    </div>`;
+}
+
+function benefitsScreen(){
+  const svc = (s)=>{
+    const locked = TIER_RANK[s.tier] > TIER_RANK[member.tier];
+    return `
+    <div class="svc">
+      <div class="ic"><ion-icon name="${s.icon}" style="${locked?'color:#b9b3a2':''}"></ion-icon></div>
+      <div style="flex:1; min-width:0">
+        <p class="nm ${locked?'lock':''}">${L(s.name)}</p>
+        ${locked?`<p class="locknote">${t(`availOn`)}</p>`:``}
+      </div>
+      ${locked?`<ion-icon class="lock-ic" name="lock-closed"></ion-icon>`:`<button class="req" onclick="toast(t('tRequest'))">${t(`requestBtn`)}</button>`}
+    </div>`;
+  };
+  return `
+  <h1 class="h1">${t(`qaBenefits`)}</h1>
+  <p class="sub">${t(`benefitsSub`)}</p>
+  <div class="perk">
+    <div class="perk-head"><ion-icon name="diamond"></ion-icon>${t(`tierWord`)} ${member.tier} — ${t(`yourBenefits`)}</div>
+    ${perks.map((p)=>`<div class="perk-row"><ion-icon name="checkmark-circle"></ion-icon>${L(p)}</div>`).join(``)}
+  </div>
+  <p class="section">${t(`profServices`)}</p>
+  <div class="group">${professionals.map(svc).join(``)}</div>
+  <p class="section">${t(`vipServices`)}</p>
+  <div class="group">${vipSvc.map(svc).join(``)}</div>`;
+}
+
+function profileScreen(){
+  return `
+  <h1 class="h1" style="margin-bottom:12px">${t(`profileTitle`)}</h1>
+  <div class="pcard">
+    <div class="av">${L(member.initials)}</div>
+    <p class="nm">${L(member.name)}</p>
+    <p class="ph">${member.phone}</p>
+    <span class="bd"><ion-icon name="diamond" style="color:var(--gold)"></ion-icon>${t(`tierWord`)} ${member.tier}</span>
+    <p class="ph" style="margin-top:6px">${t(`memberSince`)} ${member.since}</p>
+  </div>
+  <div class="fee">
+    <span class="l">${t(`annualFee`)} (${member.tier})</span>
+    <span class="v">${fmt(FEES[member.tier])}</span>
+  </div>
+  <div class="group" style="margin-top:12px">
+    ${profileRows.map((r)=>`
+      <div class="prow" onclick="${r.action==='lang'?'openLang()':"toast(t('tSoon'))"}">
+        <div class="ic"><ion-icon name="${r.icon}"></ion-icon></div>
+        <span class="l">${t(r.key)}</span>
+        <ion-icon name="chevron-${state.lang==='he'?'back':'forward'}"></ion-icon>
+      </div>`).join(``)}
+  </div>
+  <button class="logout" onclick="logout()"><ion-icon name="log-out-outline"></ion-icon>${t(`logout`)}</button>`;
+}
+
+/* ---------- tab bar ---------- */
+const TABS = [
+  {id:`home`, icon:`home`},
+  {id:`invest`, icon:`trending-up`},
+  {id:`docs`, icon:`document-text`},
+  {id:`benefits`, icon:`diamond`},
+  {id:`profile`, icon:`person`},
+];
+function activeTab(){ return state.screen==='events' ? 'home' : state.screen; }
+function renderTabs(){
+  const at = activeTab();
+  const order = state.lang==='he' ? [...TABS].reverse() : TABS;
+  document.getElementById('tabbar').innerHTML = order.map((tb)=>`
+    <div class="tab ${tb.id===at?'active':''}" onclick="go('${tb.id}')">
+      <div class="w"><ion-icon name="${tb.id===at?tb.icon:tb.icon+'-outline'}"></ion-icon></div>
+    </div>`).join(``);
+}
+
+/* ---------- render / nav ---------- */
+const SCREENS = {home:homeScreen, invest:investScreen, events:eventsScreen, docs:docsScreen, benefits:benefitsScreen, profile:profileScreen};
+function render(){
+  const screen = document.getElementById('screen');
+  screen.setAttribute('dir', LANGS[state.lang].dir);
+  document.documentElement.lang = state.lang;
+  document.getElementById('scroll').innerHTML = SCREENS[state.screen]();
+  document.getElementById('scroll').scrollTop = 0;
+  renderTabs();
+  document.getElementById('statusBtnLabel').textContent = t('statusBtn');
+}
+function go(s){ state.screen = s; render(); }
+
+/* ---------- language ---------- */
+function openLang(){
+  document.getElementById('langTitle').textContent = t('langTitle');
+  document.getElementById('langList').innerHTML = Object.keys(LANGS).map((code)=>`
+    <div class="lang-opt ${code===state.lang?'sel':''}" onclick="setLang('${code}')">
+      <span class="flag">${LANGS[code].flag}</span>
+      <span class="ln">${LANGS[code].name}</span>
+      ${code===state.lang?`<ion-icon class="chk" name="checkmark-circle"></ion-icon>`:``}
+    </div>`).join(``);
+  document.getElementById('langOverlay').classList.add('show');
+}
+function closeLang(){ document.getElementById('langOverlay').classList.remove('show'); }
+function setLang(code){
+  state.lang = code; closeLang();
+  render();
+  if(openingVisible()){ buildTagline(); renderLoginCard(); document.getElementById('mgTag').setAttribute('dir', LANGS[code].dir); }
+}
+
+/* ---------- events / toast ---------- */
+function registerEvent(i){ state.reg[i] = !state.reg[i]; if(state.reg[i]) toast(t('tRegistered')); render(); }
+let toastTimer;
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>el.classList.remove('show'), 2600);
+}
+
+/* ---------- build status modal ---------- */
+const STATUS_INFO = {
+  title:{he:`MAOZ Founders Club`,en:`MAOZ Founders Club`,fr:`MAOZ Founders Club`,es:`MAOZ Founders Club`},
+  meta:{he:`עודכן 13.06.2026 · Expo SDK 56 · אב-טיפוס`,en:`Updated 13.06.2026 · Expo SDK 56 · prototype`,fr:`Mis à jour 13.06.2026 · Expo SDK 56 · prototype`,es:`Actualizado 13.06.2026 · Expo SDK 56 · prototipo`},
+  doneTtl:{he:`מה נבנה עד כה`,en:`Built so far`,fr:`Déjà réalisé`,es:`Realizado`},
+  pendTtl:{he:`בהמשך`,en:`Up next`,fr:`À venir`,es:`Próximamente`},
+};
+const DONE = [
+  {he:`מסך פתיחה + התחברות SMS`,en:`Splash + SMS login`,fr:`Accueil + connexion SMS`,es:`Inicio + acceso SMS`},
+  {he:`דשבורד ראשי (יתרה, מסלול, פעולות מהירות)`,en:`Main dashboard (balance, tier, quick actions)`,fr:`Tableau de bord (solde, formule, actions)`,es:`Panel principal (saldo, nivel, accesos)`},
+  {he:`מסך השקעות — WEST + THE HARBUR`,en:`Investments — WEST + THE HARBUR`,fr:`Investissements — WEST + THE HARBUR`,es:`Inversiones — WEST + THE HARBUR`},
+  {he:`אירועים קרובים + הרשמה`,en:`Upcoming events + registration`,fr:`Événements + inscription`,es:`Eventos + inscripción`},
+  {he:`מסמכים · הטבות · פרופיל`,en:`Documents · benefits · profile`,fr:`Documents · avantages · profil`,es:`Documentos · beneficios · perfil`},
+  {he:`מתג שפות — עברית / אנגלית / צרפתית / ספרדית`,en:`Language switch — HE / EN / FR / ES`,fr:`Sélecteur de langue — HE / EN / FR / ES`,es:`Selector de idioma — HE / EN / FR / ES`},
+  {he:`דמי חברות: סילבר 2500 · גולד 3500 · פלטינום 5000`,en:`Fees: Silver 2500 · Gold 3500 · Platinum 5000`,fr:`Cotisations : Silver 2500 · Gold 3500 · Platinum 5000`,es:`Cuotas: Silver 2500 · Gold 3500 · Platinum 5000`},
+  {he:`טאב-בר צף + עיצוב מעוגל cream/green/gold`,en:`Floating tab bar + rounded cream/green/gold design`,fr:`Barre flottante + design arrondi`,es:`Barra flotante + diseño redondeado`},
+];
+const PENDING = [
+  {he:`חיבור SMS אמיתי + שרת (Backend)`,en:`Real SMS + backend`,fr:`SMS réel + backend`,es:`SMS real + backend`},
+  {he:`נתונים חיים לכל לקוח`,en:`Live per-member data`,fr:`Données en direct par membre`,es:`Datos en vivo por socio`},
+  {he:`פרסום ל-App Store / Google Play`,en:`App Store / Google Play release`,fr:`Publication App Store / Google Play`,es:`Publicación App Store / Google Play`},
+];
+function openInfo(){
+  const dir = LANGS[state.lang].dir;
+  document.getElementById('infoBox').setAttribute('dir', dir);
+  document.getElementById('infoBox').innerHTML = `
+    <h3>${L(STATUS_INFO.title)}</h3>
+    <p class="meta">${L(STATUS_INFO.meta)}</p>
+    <p class="ttl">${L(STATUS_INFO.doneTtl)}</p>
+    <ul>${DONE.map((d)=>`<li class="done"><ion-icon name="checkmark-circle"></ion-icon><span>${L(d)}</span></li>`).join(``)}</ul>
+    <p class="ttl">${L(STATUS_INFO.pendTtl)}</p>
+    <ul>${PENDING.map((d)=>`<li class="pend"><ion-icon name="ellipse-outline"></ion-icon><span>${L(d)}</span></li>`).join(``)}</ul>
+    <button class="gold-btn close" onclick="closeInfo()">OK</button>`;
+  document.getElementById('infoOverlay').classList.add('show');
+}
+function closeInfo(){ document.getElementById('infoOverlay').classList.remove('show'); }
+
+/* ---------- scale to fit ---------- */
+function fit(){
+  const stage = document.getElementById('stage');
+  const s = Math.min(1, (window.innerHeight-150)/844, (window.innerWidth-24)/390);
+  stage.style.transform = `scale(${s<0.4?0.4:s})`;
+}
+window.addEventListener('resize', fit);
+
+function logout(){ startOpening(true); toast(t('tLogout')); }
+
+/* expose */
+Object.assign(window,{go,openLang,closeLang,setLang,toast,t,registerEvent,openInfo,closeInfo,sendCode,doLogin,logout,skipIntro,otpNext,backToPhone,startOpening});
+
+/* optional deep-link: ?screen=events&lang=en  ·  ?skip (straight to app)  ·  ?open=green|card (freeze a phase) */
+let _skipOpening = false, _openFreeze = null;
+try{
+  const q = new URLSearchParams(location.search);
+  const ls = q.get('lang'); if(ls && LANGS[ls]) state.lang = ls;
+  const sc = q.get('screen'); if(sc && SCREENS[sc]){ state.screen = sc; _skipOpening = true; }
+  if(q.has('skip') || q.has('nointro')) _skipOpening = true;
+  _openFreeze = q.get('open'); // 'green' | 'card'
+}catch(e){}
+
+render();
+
+if(_openFreeze === 'green'){
+  buildTagline(); renderLoginCard();
+  document.getElementById('opening').classList.add('play');
+} else if(_openFreeze === 'card'){
+  startOpening(true);
+} else if(_skipOpening){
+  document.getElementById('opening').style.display = 'none';
+} else {
+  startOpening(false);
+}
+
+fit();
+</script>
+</body>
+</html>
