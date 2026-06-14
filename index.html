@@ -85,15 +85,16 @@
   /* tier hero */
   .tier{position:relative; overflow:hidden; border-radius:var(--r); padding:18px; border:1px solid var(--tac-border); box-shadow:0 16px 34px -12px rgba(12,58,43,.4);
     --tfg:var(--cream); --tdim:var(--cream-dim); --tac:var(--gold); --tac-border:rgba(202,164,99,.5);
-    -webkit-backdrop-filter:blur(9px); backdrop-filter:blur(9px);}
-  /* tier-themed metallic finishes */
-  .tier.gold{background:linear-gradient(150deg, rgba(224,189,124,.93), rgba(178,135,62,.82) 52%, rgba(233,206,148,.92)); --tfg:#36290e; --tdim:rgba(54,41,14,.74); --tac:#5e441a; --tac-border:rgba(120,90,40,.55);}
-  .tier.silver{background:linear-gradient(150deg, rgba(220,224,227,.93), rgba(168,176,182,.84) 52%, rgba(236,239,242,.92)); --tfg:#272d32; --tdim:rgba(39,45,50,.72); --tac:#525c65; --tac-border:rgba(120,130,138,.55);}
-  .tier.platinum{background:linear-gradient(150deg, rgba(48,48,54,.94), rgba(9,9,11,.92) 52%, rgba(60,60,68,.94)); --tfg:#f1ead7; --tdim:rgba(241,234,215,.7); --tac:#cBA463; --tac-border:rgba(202,164,99,.5);}
+    -webkit-backdrop-filter:blur(13px) saturate(1.15); backdrop-filter:blur(13px) saturate(1.15);}
+  /* tier-themed metallic finishes — more transparent (glassy) */
+  .tier.gold{background:linear-gradient(150deg, rgba(224,189,124,.6), rgba(178,135,62,.48) 52%, rgba(233,206,148,.6)); --tfg:#36290e; --tdim:rgba(54,41,14,.78); --tac:#5e441a; --tac-border:rgba(120,90,40,.5);}
+  .tier.silver{background:linear-gradient(150deg, rgba(220,224,227,.58), rgba(168,176,182,.46) 52%, rgba(236,239,242,.58)); --tfg:#272d32; --tdim:rgba(39,45,50,.76); --tac:#525c65; --tac-border:rgba(120,130,138,.5);}
+  .tier.platinum{background:linear-gradient(150deg, rgba(40,40,46,.72), rgba(8,8,10,.64) 52%, rgba(54,54,62,.72)); --tfg:#f1ead7; --tdim:rgba(241,234,215,.74); --tac:#cBA463; --tac-border:rgba(202,164,99,.5);}
   /* subtle metallic sheen */
   .tier::after{content:""; position:absolute; inset:0; background:linear-gradient(120deg, rgba(255,255,255,.16) 0%, transparent 32%, transparent 68%, rgba(255,255,255,.1) 100%); pointer-events:none;}
   .tier>*{position:relative; z-index:1;}
-  .tier .club{font-family:var(--label); font-size:10px; letter-spacing:2px; color:var(--tdim);}
+  .tier .club{font-family:var(--label); font-size:10px; letter-spacing:2px; color:var(--tdim); font-weight:500;}
+  .tier .club, .tier .tname, .tier .since, .tier .badge{text-shadow:0 1px 1.5px rgba(0,0,0,.16);}
   .tier .badge{display:inline-flex; align-items:center; gap:4px; border:1px solid var(--tac); border-radius:999px; padding:3px 10px; color:var(--tac); font-family:var(--label); font-size:12px; letter-spacing:1.5px;}
   .tier .badge ion-icon{color:var(--tac);}
   .tier .tname{font-family:var(--display); font-weight:700; font-size:27px; color:var(--tfg); margin:26px 0 0; text-align:start;}
