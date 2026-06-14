@@ -99,9 +99,11 @@
   .tier .badge ion-icon{color:var(--tac);}
   .tier .tname{font-family:var(--display); font-weight:700; font-size:27px; color:var(--tfg); margin:26px 0 0; text-align:start;}
   .tier .since{font-size:12px; color:var(--tdim);}
-  .tier .mono{width:40px; height:40px; opacity:.55; background-color:var(--tac);
+  .tier .mono{width:44px; height:44px; opacity:.92; background-color:var(--green-ink);
     -webkit-mask:url(maoz-app/assets/brand/maoz-m.png) center/contain no-repeat;
     mask:url(maoz-app/assets/brand/maoz-m.png) center/contain no-repeat;}
+  /* dark-green is invisible on the black platinum card → use a light fill there */
+  .tier.platinum .mono{background-color:#e9e2cf; opacity:.85;}
 
   /* balance */
   .bal-label{font-size:13px; color:var(--ink-dim); margin:0; text-align:start;}
