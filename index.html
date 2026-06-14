@@ -99,7 +99,9 @@
   .tier .badge ion-icon{color:var(--tac);}
   .tier .tname{font-family:var(--display); font-weight:700; font-size:27px; color:var(--tfg); margin:26px 0 0; text-align:start;}
   .tier .since{font-size:12px; color:var(--tdim);}
-  .tier .mono{font-family:var(--display); font-size:30px; color:var(--tac); opacity:.5;}
+  .tier .mono{width:40px; height:40px; opacity:.55; background-color:var(--tac);
+    -webkit-mask:url(maoz-app/assets/brand/maoz-m.png) center/contain no-repeat;
+    mask:url(maoz-app/assets/brand/maoz-m.png) center/contain no-repeat;}
 
   /* balance */
   .bal-label{font-size:13px; color:var(--ink-dim); margin:0; text-align:start;}
@@ -615,7 +617,7 @@ function homeScreen(){
     <p class="tname">${L(m.name)}</p>
     <div class="between" style="align-items:flex-end; margin-top:8px">
       <span class="since">${t(`memberSince`)} ${m.since}</span>
-      <span class="mono">M</span>
+      <span class="mono" aria-label="MAOZ GROUP"></span>
     </div>
   </div>
 
