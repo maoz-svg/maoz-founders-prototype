@@ -302,7 +302,6 @@
 
         <div class="opening" id="opening">
           <div class="login-lang"><div class="icbtn" onclick="openLang()" title="Language"><ion-icon name="language-outline"></ion-icon></div></div>
-          <button class="skip" id="skipBtn" onclick="skipIntro()">דלג</button>
           <div class="intro-green" id="introGreen">
             <img class="mg-logo" src="maoz-app/assets/brand/maoz-group.png" alt="MAOZ GROUP">
             <div class="mg-tag" id="mgTag"></div>
@@ -494,7 +493,6 @@ function buildTagline(){
   const words = L(UI.loginTag).split(' · ');
   const tag = document.getElementById('mgTag');
   tag.setAttribute('dir', dir);
-  document.getElementById('skipBtn').textContent = t('skip');
   let html = `<span class="rule" style="animation-delay:4.2s"></span>`;
   words.forEach((w,i)=>{
     if(i>0) html += `<span class="dot" style="animation-delay:${(2.2+i*0.7-0.15).toFixed(2)}s">·</span>`;
@@ -567,7 +565,7 @@ function startOpening(skipGreen){
     return;
   }
   op.classList.add('play');
-  // words+rules settle ~4.85s; linger ~3s on the MAOZ GROUP screen, then hand off to cream + start video.
+  // words+rules settle ~4.85s; linger briefly on the MAOZ GROUP screen, then hand off to cream + start video.
   later(()=>{
     op.classList.add('cream');
     try{
@@ -575,11 +573,11 @@ function startOpening(skipGreen){
       const p = v.play();
       if(p && p.catch) p.catch(()=>{ later(revealCard, 1000); }); // autoplay blocked → reveal shortly
     }catch(e){ later(revealCard, 1000); }
-  }, 7800);
-  // Let the ~10.8s writing video FINISH, hold ~2.5s, then rise + bring in the card.
-  v.onended = ()=> later(revealCard, 2500);
-  // Ultimate fallback only if 'ended' is missed (cream@7.8s + ~10.8s video + 2.5s hold + buffer).
-  later(revealCard, 22500);
+  }, 6300);
+  // Let the ~10.8s writing video FINISH, hold briefly, then rise + bring in the card.
+  v.onended = ()=> later(revealCard, 1500);
+  // Ultimate fallback only if 'ended' is missed (cream@6.3s + ~10.8s video + 1.5s hold + buffer).
+  later(revealCard, 20000);
 }
 function skipIntro(){
   clearOpenTimers();
