@@ -6,7 +6,7 @@
 <title>MAOZ Founders Club — אב-טיפוס</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&family=Heebo:wght@400;500;700&family=Cormorant+Garamond:wght@500;600&family=Space+Grotesk:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&family=Heebo:wght@300;400;500;700&family=Cormorant+Garamond:wght@500;600&family=Space+Grotesk:wght@400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <style>
@@ -199,18 +199,17 @@
   /* phase 1 — deep green intro */
   .intro-green{position:absolute; inset:0; background:#0a241b; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3; transition:opacity .7s ease; opacity:1;}
   .opening.cream .intro-green{opacity:0; pointer-events:none;}
-  .mg-logo{width:44%; max-width:190px; height:auto; opacity:0;}
+  /* updated MAOZ GROUP brand logo (2026): cream wordmark + gold tagline in the logo's light sans */
+  .mg-logo{width:50%; max-width:210px; height:auto; opacity:0;}
   .opening.play .mg-logo{animation:mgFade 1.5s ease .5s forwards;}
   @keyframes mgFade{from{opacity:0; transform:scale(.99);} to{opacity:1; transform:scale(1);}}
-  .mg-tag{display:flex; align-items:center; gap:7px; margin-top:14px;}
-  .mg-tag .w{font-family:var(--serif); font-size:13px; color:#d8b46a; letter-spacing:.5px; clip-path:inset(0 0 0 100%); opacity:0;}
+  .mg-tag{display:flex; align-items:center; gap:8px; margin-top:4px; margin-inline-end:2.5%;}
+  .mg-tag .w{font-family:var(--body); font-weight:300; font-size:10.5px; color:#c8a86a; letter-spacing:1.8px; clip-path:inset(0 0 0 100%); opacity:0;}
   .mg-tag[dir="ltr"] .w{clip-path:inset(0 100% 0 0);}
   .opening.play .mg-tag .w{animation:writeWord .6s ease forwards;}
   @keyframes writeWord{to{clip-path:inset(0 0 0 0); opacity:1;}}
-  .mg-tag .dot{font-family:var(--serif); font-size:13px; color:#d8b46a; opacity:0;}
+  .mg-tag .dot{font-family:var(--body); font-weight:300; font-size:12px; line-height:1; color:#c8a86a; opacity:0;}
   .opening.play .mg-tag .dot{animation:fadeIn .3s ease forwards;}
-  .mg-tag .rule{width:26px; height:1px; background:linear-gradient(90deg,transparent,#d8b46a,transparent); opacity:0;}
-  .opening.play .mg-tag .rule{animation:fadeIn .65s ease 2.6s forwards;}
   @keyframes fadeIn{to{opacity:1;}}
 
   /* phase 2/3 — club cream + video + login card */
@@ -430,13 +429,13 @@ const newInv = [
 ];
 
 const events = [
-  { date:`24.07.2026`,
+  { date:`17.12.2026 · 19:30`,
     title:{he:`ערב משקיעים בלעדי`,en:`Exclusive Investors Evening`,fr:`Soirée investisseurs exclusive`,es:`Velada exclusiva de inversores`},
     where:{he:`מלון The Norman, תל אביב`,en:`The Norman Hotel, Tel Aviv`,fr:`Hôtel The Norman, Tel-Aviv`,es:`Hotel The Norman, Tel Aviv`} },
-  { date:`12.09.2026`,
+  { date:`18.03.2027 · 10:00`,
     title:{he:`סיור פרויקט THE HARBUR`,en:`THE HARBUR Project Tour`,fr:`Visite du projet THE HARBUR`,es:`Visita al proyecto THE HARBUR`},
     where:{he:`פיראוס, יוון`,en:`Piraeus, Greece`,fr:`Le Pirée, Grèce`,es:`El Pireo, Grecia`} },
-  { date:`05.11.2026`,
+  { date:`12.05.2027 · 09:00`,
     title:{he:`כנס נדל״ן בינלאומי`,en:`International Real-Estate Summit`,fr:`Sommet immobilier international`,es:`Cumbre inmobiliaria internacional`},
     where:{he:`מרכז הכנסים, תל אביב`,en:`Convention Center, Tel Aviv`,fr:`Centre de congrès, Tel-Aviv`,es:`Centro de convenciones, Tel Aviv`} },
 ];
@@ -493,12 +492,11 @@ function buildTagline(){
   const words = L(UI.loginTag).split(' · ');
   const tag = document.getElementById('mgTag');
   tag.setAttribute('dir', dir);
-  let html = `<span class="rule" style="animation-delay:4.2s"></span>`;
+  let html = ``;
   words.forEach((w,i)=>{
-    if(i>0) html += `<span class="dot" style="animation-delay:${(2.2+i*0.7-0.15).toFixed(2)}s">·</span>`;
+    if(i>0) html += `<span class="dot" style="animation-delay:${(2.2+i*0.7-0.15).toFixed(2)}s">•</span>`;
     html += `<span class="w" style="animation-delay:${(2.2+i*0.7).toFixed(2)}s">${w}</span>`;
   });
-  html += `<span class="rule" style="animation-delay:4.2s"></span>`;
   tag.innerHTML = html;
 }
 
@@ -574,10 +572,10 @@ function startOpening(skipGreen){
       if(p && p.catch) p.catch(()=>{ later(revealCard, 1000); }); // autoplay blocked → reveal shortly
     }catch(e){ later(revealCard, 1000); }
   }, 6300);
-  // Let the ~10.8s writing video FINISH, hold briefly, then rise + bring in the card.
-  v.onended = ()=> later(revealCard, 1500);
-  // Ultimate fallback only if 'ended' is missed (cream@6.3s + ~10.8s video + 1.5s hold + buffer).
-  later(revealCard, 20000);
+  // Let the ~6.6s writing video FINISH (trimmed + 1.2×), a short beat, then rise + bring in the card.
+  v.onended = ()=> later(revealCard, 350);
+  // Ultimate fallback only if 'ended' is missed (cream@6.3s + ~6.6s video + hold + buffer).
+  later(revealCard, 15000);
 }
 function skipIntro(){
   clearOpenTimers();
@@ -841,17 +839,17 @@ function toast(msg){
 /* ---------- build status modal ---------- */
 const STATUS_INFO = {
   title:{he:`MAOZ Founders Club`,en:`MAOZ Founders Club`,fr:`MAOZ Founders Club`,es:`MAOZ Founders Club`},
-  meta:{he:`עודכן 13.06.2026 · Expo SDK 56 · אב-טיפוס`,en:`Updated 13.06.2026 · Expo SDK 56 · prototype`,fr:`Mis à jour 13.06.2026 · Expo SDK 56 · prototype`,es:`Actualizado 13.06.2026 · Expo SDK 56 · prototipo`},
+  meta:{he:`עודכן 19.11.2026 · Expo SDK 56 · אב-טיפוס`,en:`Updated 19.11.2026 · Expo SDK 56 · prototype`,fr:`Mis à jour 19.11.2026 · Expo SDK 56 · prototype`,es:`Actualizado 19.11.2026 · Expo SDK 56 · prototipo`},
   doneTtl:{he:`מה נבנה עד כה`,en:`Built so far`,fr:`Déjà réalisé`,es:`Realizado`},
   pendTtl:{he:`בהמשך`,en:`Up next`,fr:`À venir`,es:`Próximamente`},
 };
 const DONE = [
-  {he:`מסך פתיחה + התחברות SMS`,en:`Splash + SMS login`,fr:`Accueil + connexion SMS`,es:`Inicio + acceso SMS`},
+  {he:`מסך פתיחה (לוגו MAOZ GROUP מעודכן, מעבר מהיר) + התחברות SMS`,en:`Opening (updated MAOZ GROUP logo, faster hand-off) + SMS login`,fr:`Ouverture (nouveau logo MAOZ GROUP, transition rapide) + connexion SMS`,es:`Apertura (nuevo logo MAOZ GROUP, transición rápida) + acceso SMS`},
   {he:`דשבורד ראשי (יתרה, מסלול, פעולות מהירות)`,en:`Main dashboard (balance, tier, quick actions)`,fr:`Tableau de bord (solde, formule, actions)`,es:`Panel principal (saldo, nivel, accesos)`},
   {he:`מסך השקעות — WEST + THE HARBUR`,en:`Investments — WEST + THE HARBUR`,fr:`Investissements — WEST + THE HARBUR`,es:`Inversiones — WEST + THE HARBUR`},
-  {he:`אירועים קרובים + הרשמה`,en:`Upcoming events + registration`,fr:`Événements + inscription`,es:`Eventos + inscripción`},
+  {he:`אירועים קרובים + הרשמה (גם באפליקציה האמיתית)`,en:`Upcoming events + registration (also in the real app)`,fr:`Événements + inscription (aussi dans l’app réelle)`,es:`Eventos + inscripción (también en la app real)`},
   {he:`מסמכים · הטבות · פרופיל`,en:`Documents · benefits · profile`,fr:`Documents · avantages · profil`,es:`Documentos · beneficios · perfil`},
-  {he:`מתג שפות — עברית / אנגלית / צרפתית / ספרדית`,en:`Language switch — HE / EN / FR / ES`,fr:`Sélecteur de langue — HE / EN / FR / ES`,es:`Selector de idioma — HE / EN / FR / ES`},
+  {he:`מתג שפות — עברית / אנגלית / צרפתית / ספרדית (גם באפליקציה האמיתית)`,en:`Language switch — HE / EN / FR / ES (also in the real app)`,fr:`Sélecteur de langue — HE / EN / FR / ES (aussi dans l’app réelle)`,es:`Selector de idioma — HE / EN / FR / ES (también en la app real)`},
   {he:`דמי חברות: סילבר 2500 · גולד 3500 · פלטינום 5000`,en:`Fees: Silver 2500 · Gold 3500 · Platinum 5000`,fr:`Cotisations : Silver 2500 · Gold 3500 · Platinum 5000`,es:`Cuotas: Silver 2500 · Gold 3500 · Platinum 5000`},
   {he:`טאב-בר צף + עיצוב מעוגל cream/green/gold`,en:`Floating tab bar + rounded cream/green/gold design`,fr:`Barre flottante + design arrondi`,es:`Barra flotante + diseño redondeado`},
 ];
